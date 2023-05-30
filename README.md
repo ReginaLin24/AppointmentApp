@@ -17,6 +17,8 @@
 
 ## Install
 
+Check you have installed both **dotenv** and **launchdarkly-node-server-sdk** locally on your machine.
+
 ```sh
 npm install
 ```
@@ -26,6 +28,10 @@ npm install
 ```sh
 npm start
 ```
+
+## What can you expect to see
+
+When you turn on targeting, you should see a green version of the appointment form, with the new field 'Respiratory Symptoms' added.
 
 ## Author
 
