@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/4a83100a-13d8-4ca3-b4a0-f4601cce80c7/resourceGroups/rl-appointmentapp-rg/providers/Microsoft.Web/sites/rl-patientapp",
+  "appService.deploySubpath": "."
+}
