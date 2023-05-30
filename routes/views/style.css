@@ -108,6 +108,13 @@ body {
   box-shadow: none;
 }
 
+.btn-secondary {
+  background-color: #737d6c;
+  outline: none;
+  border: 0px;
+  box-shadow: none;
+}
+
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {

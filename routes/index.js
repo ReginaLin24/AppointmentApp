@@ -19,16 +19,51 @@ router.get("/", async (req, res, next) => {
   //   return;
   // }
 
-  let showFeature = await client.variation(
+  //read the user name cookie
+  const userName = req.cookies.username;
+  var userKey;
+  if (userName == "" || userName == undefined || userName == null) {
+    userKey = "anonymous";
+  } else {
+    userKey = userName;
+  }
+  console.log(userKey);
+
+  let isNewDataField = await client.variation(
     "newDataField",
-    {key: "anonymous"},
+    {key: userKey},
     false
   );
-  if (showFeature) {
-    res.sendFile(path.join(__dirname, "/views/newIndex.html"));
+  let isDoctorView = await client.variation(
+    "showDoctorView",
+    {key: userKey},
+    false
+  );
+
+  console.log("isNewDataField = " + isNewDataField);
+  console.log("isDoctorView = " + isDoctorView);
+
+  if (isNewDataField) {
+    res.sendFile(path.join(__dirname, "/views/dataFieldIndex.html"));
     return;
   }
+
+  if (isDoctorView) {
+    res.sendFile(path.join(__dirname, "/views/docIndex.html"));
+    return;
+  }
+
   res.sendFile(path.join(__dirname, "/views/index.html"));
+});
+
+router.post("/login", function (req, res, next) {
+  const {username} = req.body;
+  console.log(username);
+
+  // Set the username as a cookie
+  res.cookie("username", username);
+
+  res.sendStatus(200);
 });
 
 router.get("/style.css", function (req, res, next) {

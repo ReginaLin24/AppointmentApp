@@ -109,6 +109,28 @@
                 ></div>
                 <p id="statusText"></p>
               </div>
+
+              <div class="col-md-8">
+                <input
+                  class="form-control"
+                  type="text"
+                  id="Username"
+                  placeholder="Enter your user name if you are a doctor"
+                />
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-button mt-3">
+                  <button id="userButton" class="btn btn-secondary">
+                    Login
+                  </button>
+                </div>
+                <div class="m-2"></div>
+                <p id="userText">
+                  Hi, please enter the details below to make a virtual
+                  appointment.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -116,6 +138,19 @@
     </div>
 
     <script>
+      // Function to get the value of a cookie by name
+      function getCookieValue(cookieName) {
+        const cookieString = document.cookie;
+        const cookies = cookieString.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.startsWith(cookieName + "=")) {
+            return cookie.substring(cookieName.length + 1);
+          }
+        }
+        return null;
+      }
+
       (() => {
         const byId = (x) => document.getElementById(x);
         const updateButton = byId("updateButton");
@@ -152,6 +187,39 @@
             .catch((error) =>
               updateStatusDone("There was an error sending your request.")
             );
+        });
+
+        if (document.cookie != "") {
+          byId("Username").value = getCookieValue("username");
+          byId("userText").innerText = "Welcome " + getCookieValue("username");
+          byId("userButton").innerText = "Logout";
+        } else {
+          byId("userButton").innerText = "Login";
+          byId("userText").innerText = "";
+        }
+
+        byId("userButton").addEventListener("click", function () {
+          //logout
+          if (document.cookie != "") {
+            document.cookie =
+              "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            location.reload();
+          } else {
+            //login
+            fetch("/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({username: byId("Username").value}),
+            })
+              .then((response) => {
+                location.reload();
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          }
         });
       })();
     </script>
