@@ -7,6 +7,8 @@
 
 ### ✨ [Demo deployed on Azure App Services](https://rl-patientapp.azurewebsites.net/) ✨
 
+![Default Home Page](images/default-homepage.png)
+
 ## How to set this up locally
 
 Before running this website locally, first we need to set up the feature flag properly on the LaunchDarkly platform.
@@ -18,7 +20,8 @@ Before running this website locally, first we need to set up the feature flag pr
 2. One of the features I have set up is to add in a few field in the appointment request form to gather data around respiratory symptoms to provide the best care and protect other patients.
 3. To make this feature available, first create a feature flag named **'newDataField'** on the platform
 4. Once you turn on the targeting for this feature, you should see a green 'Beta' version of the form with a newly added field 'Respiratory Symptoms'
-   ![Default Home Page](images/default-homepage.png)
+
+![Default Home Page](images/beta-homepage.png)
 
 ### Second Feature Flag - Next patient appointment look up for doctors (should be tested separately to the first feature flag)
 
@@ -27,6 +30,7 @@ Before running this website locally, first we need to set up the feature flag pr
 7. To make this feature available, create a feature flag named **'showDoctorView'** on the platform, under Individual targets, specify a test doctor name e.g. Dr.Lin and leave the default rollout as False
 8. To test this feature, stick with the default home page (Navy blue version), enter 'Dr.Lin' as the doctor to log in.
 9. Wait for the user context for Dr.Lin to be created in the portal, once you have created and signed in again, you should be able to see the next patient details and a call button.
+   ![Default Home Page](images/doctor-view.png)
 
 ## Install
 
