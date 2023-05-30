@@ -12,7 +12,6 @@ router.get("/", async (req, res, next) => {
 
   // try {
   const client = LaunchDarkly.init("sdk-7a4f697c-6712-4a70-8716-6d9e3ca2719f");
-  console.log(process.env.LAUNCHDARKLY_SDK_KEY);
   await client.waitForInitialization();
   // } catch (error) {
   //   const errorString = JSON.stringify(error);
